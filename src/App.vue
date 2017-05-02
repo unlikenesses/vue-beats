@@ -3,7 +3,7 @@
 		<h1>vue.beats</h1>
 		<div class="machine">
 			<Controls @togglePlay="togglePlay" @clearPattern="clearPattern"  @changeBpm="changeBpm" :playing="store.playing" :bpm="store.bpm"></Controls>
-			<component v-for="stave in store.staves" :key="stave.id" is="stave" :name="stave.name" :notes="stave.notes"></component>
+			<component v-for="stave in store.staves" :key="stave.id" is="stave" :name="stave.name" :notes="stave.notes" @toggleNote="toggleNote"></component>
 			<Transporter :pos="store.transporterPos"></Transporter>
 		</div>
     	<p class="credits">Built with <a href="https://vuejs.org/" target="_blank">vue.js</a></p>
@@ -24,6 +24,13 @@
 		data() { 
 			return {
 				store: store
+			}
+		},
+
+		created() {
+			this.restorePatterns();
+			if (store.playing) {
+				this.setTempo();
 			}
 		},
 
@@ -49,6 +56,10 @@
 					clearInterval(this.timerId);
 					this.setTempo();
 				}
+			},
+			toggleNote(note) {
+				note.active = !note.active;
+				this.savePatterns();
 			},
 			checkNote() {
 				let transporterPos = store.transporterPos;
@@ -84,12 +95,20 @@
 					}
 				}
 				store.staves = staves;
-			}
-		},
-
-		created() {
-			if (store.playing) {
-				this.setTempo();
+				this.savePatterns();
+			},
+			savePatterns() {
+				for (var stave of store.staves) {
+					localStorage.setItem('vb-pattern-' + stave.id, JSON.stringify(stave.notes));
+				}				
+			},
+			restorePatterns() {
+				for (var stave of store.staves) {
+					let localStorageRef = localStorage.getItem('vb-pattern-' + stave.id);
+					if (localStorageRef) {
+						stave.notes = JSON.parse(localStorageRef);
+					}
+				}
 			}
 		}
 	}
