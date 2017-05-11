@@ -1,6 +1,6 @@
 <template>
 	<div class="noteContainer" @click="handleClick">
-		<div class="note" v-bind:class="{active : active}"><div class="hilight"></div></div>
+		<div class="note" v-bind:class="{active : active}"></div>
 	</div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
 		border: 3px solid rgba(120, 0, 0, 1);
 	}
 
-	.note .hilight {
+	.note:after {
+		content: '';
 		width: 4px;
 		height: 4px;
 		border-radius: 50%;
@@ -50,7 +51,7 @@ export default {
 		box-shadow: 3px 4px 7px 9px rgba(180, 0, 0, 0.6);
 	}
 
-	.active .hilight {
+	.active:after {
 		background-color: rgba(255,255,255,1);
 		box-shadow: 4px 4px 6px 7px rgba(255, 0, 0, 1);
 	}

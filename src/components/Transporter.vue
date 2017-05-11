@@ -9,7 +9,7 @@
 		<TransporterBlank/>
 		<TransporterBlank/>
 		<div class="transporter">					
-			<div class="transportLight transportLightActive" :style="lightPos"><div class="hilight"></div></div>
+			<div class="transportLight transportLightActive" :style="lightPos"></div>
 		</div>
 	</div>
 </template>
@@ -66,7 +66,8 @@
 		border: 3px solid #222;
 	}
 
-	.transportLight .hilight {
+	.transportLight:after {
+		content: '';
 		width: 4px;
 		height: 4px;
 		border-radius: 50%;
@@ -83,7 +84,7 @@
 		border: 3px solid rgba(0, 120, 0, 1);
 	}
 
-	.transportLightActive .hilight {
+	.transportLightActive:after {
 		background-color: rgba(255,255,255,1);
 		box-shadow: 4px 4px 6px 7px rgba(0, 255, 0, 1);
 	}

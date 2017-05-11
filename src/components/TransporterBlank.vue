@@ -1,8 +1,6 @@
 <template>
 	<div class="transporterOff">
-		<div class="transportLight">
-			<div class="hilight"></div>
-		</div>
+		<div class="transportLight"></div>
 	</div>
 </template>
 

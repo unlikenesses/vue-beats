@@ -34,5 +34,9 @@
 		background: #111;
 		width: 80px;
 		padding: 3px 8px 3px 8px;
+		border-left: 2px solid #222222;
+		border-right: 2px solid #454545;
+		border-top: 2px solid #212121;
+		border-bottom: 2px solid #565656;
 	}
 </style>
